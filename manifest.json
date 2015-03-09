@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "Costco Tire tracker",
+  "description": "This extension keeps track of when your tire is available at Costco.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": ["js/jquery.min.js", "background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "alarms",
+    "tabs",
+    "webNavigation",
+    "*://*.costco.com/"
+  ]
+}
