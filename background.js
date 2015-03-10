@@ -58,14 +58,28 @@ function makeSearchRequest(searchId) {
       console.log('Finished getting search results.');
       var $temp = $.parseHTML(data);
       //TODO handle pagination case.
+      //$foo = $($temp[$temp.length - 1]).find('#p_lt_zoneContent_pageplaceholder_p_lt_ctl02_TireSearchResults_gvOrginalFitmentFrontTires')
       $foo = $($temp[$temp.length - 1]).find('#p_lt_zoneContent_pageplaceholder_p_lt_ctl02_TireSearchResults_gvOptionalFitmentRearTires')
           .find('div.tireDetails h3 span')
-          .map(function(index, el) {
-            return this.innerHTML;
+          .filter(function(index, el) {
+            return checkTire(this.innerHTML);
           });
-      console.log($foo);
+      getResults($foo);
     });
 };
+
+function checkTire(tire) {
+  var re = /[Mm]ichelin.*[Ss]uper.*[Ss]port/;
+  return re.test(tire);
+}
+
+/**
+ * Return whether the tire is the right one.
+ */
+function getResults(list) {
+  console.log('Does Costco have your tire?');
+  console.log(list.length > 0);
+}
 
 getSearchId();
 console.log('done');
